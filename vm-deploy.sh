@@ -60,7 +60,7 @@ fi
 if [[ $STATICIP == 1 ]]; then	
 	EXTARG="${EXTARG} --copy-in $DIR/interfaces:/etc/network/"
 else
-	EXTARG="${EXTARG} --copy-in $DIR/interfaces.dhcp:/etc/network/interfaces"
+	EXTARG="${EXTARG} --copy-in $DIR/defaults/interfaces:/etc/network/"
 fi
 
 virt-sysprep -d $MASTER $EXTARG \
@@ -68,6 +68,12 @@ virt-sysprep -d $MASTER $EXTARG \
 --hostname $NAME \
 --firstboot-install "vim,unattended-upgrades" \
 --update \
+--operations abrt-data,backup-files,bash-history,blkid-tab,crash-data, \
+cron-spool,customize,dhcp-client-state,dhcp-server-state,dovecot-data, \
+logfiles,lvm-uuids,machine-id,mail-spool,net-hostname,net-hwaddr,pacct-log, \
+package-manager-cache,pam-data,passwd-backups,puppet-data-log,rh-subscription-manager,\
+rhn-systemid,rpm-db,samba-db-log,script,smolt-uuid,ssh-hostkeys,ssh-userdir \
+sssd-db-log,tmp-files,udev-persistent-net,utmp,user-accout \
 --root-password disabled
 
 virt-clone --original $MASTER --name $NAME --auto-clone

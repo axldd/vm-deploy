@@ -54,7 +54,7 @@ shift $((OPTIND -1))
 
 
 if [[ -f $SSHKEY ]]; then
-	EXTARG="{$EXTARG} --ssh-inject $SSHKEY"
+	EXTARG="${EXTARG} --ssh-inject $SSHKEY"
 	echo "Injecting $SSHKEY"
 fi
 

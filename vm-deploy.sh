@@ -55,12 +55,15 @@ shift $((OPTIND -1))
 
 if [[ -f $SSHKEY ]]; then
 	EXTARG="{$EXTARG} --ssh-inject $SSHKEY"
+	echo "Injecting $SSHKEY"
 fi
 
 if [[ $STATICIP == 1 ]]; then	
 	EXTARG="${EXTARG} --copy-in $DIR/interfaces:/etc/network/"
+	echo "Using custom file for /etc/interfaces"
 else
 	EXTARG="${EXTARG} --copy-in $DIR/defaults/interfaces:/etc/network/"
+	echo "Using DHCP"
 fi
 
 virt-sysprep -d $MASTER $EXTARG \

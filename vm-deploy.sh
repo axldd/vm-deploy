@@ -68,12 +68,12 @@ virt-sysprep -d $MASTER $EXTARG \
 --hostname $NAME \
 --firstboot-install "vim,unattended-upgrades" \
 --update \
---operations abrt-data,backup-files,bash-history,blkid-tab,crash-data, \
-cron-spool,customize,dhcp-client-state,dhcp-server-state,dovecot-data, \
-logfiles,lvm-uuids,machine-id,mail-spool,net-hostname,net-hwaddr,pacct-log, \
+--operations abrt-data,backup-files,bash-history,blkid-tab,crash-data,\
+cron-spool,customize,dhcp-client-state,dhcp-server-state,dovecot-data,\
+logfiles,lvm-uuids,machine-id,mail-spool,net-hostname,net-hwaddr,pacct-log,\
 package-manager-cache,pam-data,passwd-backups,puppet-data-log,rh-subscription-manager,\
-rhn-systemid,rpm-db,samba-db-log,script,smolt-uuid,ssh-hostkeys,ssh-userdir \
-sssd-db-log,tmp-files,udev-persistent-net,utmp,user-accout \
+rhn-systemid,rpm-db,samba-db-log,script,smolt-uuid,ssh-hostkeys,ssh-userdir,\
+sssd-db-log,tmp-files,udev-persistent-net,utmp,user-account \
 --root-password disabled
 
 virt-clone --original $MASTER --name $NAME --auto-clone

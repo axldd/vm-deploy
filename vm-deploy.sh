@@ -32,7 +32,7 @@ resize() {
 }
 
 set_ip() {
-	EXTARG="--copy-in $DIR/interfaces:/etc/network/"
+	EXTARG="${EXTARG} --copy-in $DIR/interfaces:/etc/network/"
 }
 
 while getopts ":hs:in:" opt; do
@@ -59,7 +59,6 @@ shift $((OPTIND -1))
 
 virt-sysprep -d $MASTER $EXTARG \
 --firstboot-command "dpkg-reconfigure openssh-server" \
---ssh-inject root:file:$SSHKEY \
 --hostname $NAME \
 --firstboot-install "vim,unattended-upgrades" \
 --update \
@@ -69,6 +68,10 @@ virt-clone --original $MASTER --name $NAME --auto-clone
 
 if [[ $VMSIZE ]]; then
 	resize
+fi
+
+if [[ -f $DIR/authorized_keys ]]; then
+	EXTARG="{$EXTARG} --ssh-inject $DIR/authorized_keys"
 fi
 
 virsh start $NAME

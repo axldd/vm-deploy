@@ -13,8 +13,8 @@ usage() {
 	echo "Usage: $0 [-h] [-s SIZE_TO_BE_ADDED] [-i] [-n NAME]"
 	echo "Creates a basic Debian 10 VM." 
 	echo "-i uses custom /etc/network/interfaces"
-	echo "-s New size, has to be >20G"
-	echo "Defaults are 20G, DHCP, random"
+	echo "-s New size, has to be > master image"
+	echo "Defaults are size of master image, DHCP, random"
 	exit 1
 }
 

@@ -31,10 +31,6 @@ resize() {
 	fi
 }
 
-set_ip() {
-	EXTARG="${EXTARG} --copy-in $DIR/interfaces:/etc/network/"
-}
-
 while getopts ":hs:in:" opt; do
         case ${opt} in
 		h )
@@ -44,7 +40,7 @@ while getopts ":hs:in:" opt; do
 			VMSIZE=$OPTARG
 			;;
 		i )
-			set_ip
+			STATICIP=1
 			;;
 		n)
 			NAME=$OPTARG
@@ -56,6 +52,16 @@ while getopts ":hs:in:" opt; do
 done
 shift $((OPTIND -1))
 
+
+if [[ -f $SSHKEY ]]; then
+	EXTARG="{$EXTARG} --ssh-inject $SSHKEY"
+fi
+
+if [[ $STATICIP == 1 ]]; then	
+	EXTARG="${EXTARG} --copy-in $DIR/interfaces:/etc/network/"
+else
+	EXTARG="${EXTARG} --copy-in $DIR/interfaces.dhcp:/etc/network/interfaces"
+fi
 
 virt-sysprep -d $MASTER $EXTARG \
 --firstboot-command "dpkg-reconfigure openssh-server" \
@@ -70,8 +76,5 @@ if [[ $VMSIZE ]]; then
 	resize
 fi
 
-if [[ -f $SSHKEY ]]; then
-	EXTARG="{$EXTARG} --ssh-inject $SSHKEY"
-fi
 
 virsh start $NAME

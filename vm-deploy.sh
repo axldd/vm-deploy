@@ -18,6 +18,7 @@ usage() {
 	exit 1
 }
 
+# TODO: Find out if sda or vda!
 resize() {
 	echo "Exanding image to $VMSIZE"
 	mv $IMAGEPATH/$NAME.qcow2 $IMAGEPATH/$NAME-old.qcow2

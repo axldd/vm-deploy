@@ -15,6 +15,7 @@ usage() {
 	echo "-i uses custom /etc/network/interfaces"
 	echo "-s New size, has to be >20G"
 	echo "Defaults are 20G, DHCP, random"
+	exit 1
 }
 
 resize() {

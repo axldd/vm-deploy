@@ -70,8 +70,8 @@ if [[ $VMSIZE ]]; then
 	resize
 fi
 
-if [[ -f $DIR/authorized_keys ]]; then
-	EXTARG="{$EXTARG} --ssh-inject $DIR/authorized_keys"
+if [[ -f $SSHKEY ]]; then
+	EXTARG="{$EXTARG} --ssh-inject $SSHKEY"
 fi
 
 virsh start $NAME

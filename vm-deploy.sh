@@ -10,7 +10,7 @@ NAME=$(pwgen -n1 -A 4)
 EXTARG=""
 
 usage() {
-	echo "Usage: $0 [-h] [-s SIZE_TO_BE_ADDED] [-i] [-n NAME]"
+	echo "Usage: $0 [-h] [-s NEW_SIZE] [-i] [-n NAME]"
 	echo "Creates a basic Debian 10 VM." 
 	echo "-i uses custom /etc/network/interfaces"
 	echo "-s New size, has to be > master image"

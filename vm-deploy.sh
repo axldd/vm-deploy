@@ -2,11 +2,11 @@
 
 # Generate standard adits Debian VM
 
-SSHKEY="/root/vm-deploy/authorized_keys"
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+SSHKEY="$DIR/authorized_keys"
 MASTER="debian10-master"
 IMAGEPATH="/var/lib/libvirt/images"
 NAME=$(pwgen -n1 -A 4)
-DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 EXTARG=""
 
 usage() {
